@@ -1,6 +1,8 @@
-# Write your code here!
+require 'pry'
+
+
 def game_hash
-  hash = {
+  game_hash = {
     home: {
       team_name: "Brooklyn Nets",
       colors: ["Black", "White"],
@@ -114,3 +116,82 @@ def game_hash
     }
   }
 end
+
+def num_points_scored(player_id)
+  game_hash.each {|location, team_data|
+  team_data[:players].each {|name, stats|
+  if name == player_id
+    return stats[:points]
+  end
+}
+}
+end
+
+def shoe_size(player_id)
+  game_hash.each {|location, team_data|
+  team_data[:players].each {|name, stats|
+  if name == player_id
+    return stats[:shoe]
+  end
+  }
+  }
+end
+
+def team_colors(team_id)
+  game_hash.each {|location, team_data|
+  if team_data[:team_name] == team_id
+    return team_data[:colors]
+  end
+  }
+end
+
+def team_names
+  team_names_array = []
+  game_hash.each {|location, team_data|
+  team_names_array << team_data[:team_name]
+  }
+  team_names_array
+end
+
+def player_numbers(team_id)
+  numbers_array = []
+  game_hash.each {|location, team_data|
+  if team_data[:team_name] == team_id
+  team_data[:players].each {|player, stats| numbers_array << stats[:number]
+  }
+  return numbers_array
+end
+  } 
+end
+
+def player_stats(player_id)
+  game_hash.each {|location, team_data|
+  team_data[:players].each {|player, stats|
+  if player == player_id
+    return stats
+  end
+  }
+  }
+end
+
+def big_shoe_rebounds
+  largest = 0 
+  rebounds = 0
+  game_hash.each {|loctaion, team_data|
+  team_data[:players].each {|player, stats|
+  if stats[:shoe] > largest
+    largest = stats[:shoe]
+    rebounds = stats[:rebounds]
+  end
+  }
+  }
+  rebounds
+end
+  
+  
+  
+
+
+  
+  
+  
