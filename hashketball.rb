@@ -119,9 +119,9 @@ end
 
 def num_points_scored(player_id)
   game_hash.each {|location, team_data|
-  binding.pry
+  
   team_data[:players].each {|name, stats|
-  binding.pry
+  
   if name == player_id
     return stats[:points]
   end
@@ -189,6 +189,59 @@ def big_shoe_rebounds
   }
   rebounds
 end
+
+def most_points_scored
+  most_points = 0 
+  high_scorer = nil
+  game_hash.each {|location, team_data|
+  team_data[:players].each {|name, stats|
+  if stats[:points] > most_points
+    most_points = stats[:points]
+    high_scorer = name
+  end 
+  }
+  }
+  high_scorer
+end
+
+def winning_team 
+  home_points = 0
+  away_points = 0 
+  winning_team = nil
+game_hash.each {|location, team_data|
+if location === :home
+team_data[:players].each {|name, stats|
+home_points += stats[:points]}
+else 
+  team_data[:players].each {|name, stats|
+away_points += stats[:points]}
+end
+}
+if home_points > away_points 
+  game_hash[:home][:team_name]
+  elsif home_points < away_points
+  game_hash[:away][:team_name]
+else 
+   puts "its a tie"
+ end
+end
+  
+  
+def player_with_longest_name
+  long_name_length = 0 
+  longest_name = nil
+  game_hash.each {|location, team_data|
+  team_data[:players].each {|name, stats|
+  if name.length > long_name_length
+    long_name_length = name.length
+    longest_name = name
+  end 
+  }
+  }
+ longest_name
+end
+  
+  
   
   
   
