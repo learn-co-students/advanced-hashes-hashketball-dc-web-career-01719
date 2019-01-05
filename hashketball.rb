@@ -201,6 +201,7 @@ def most_points_scored
   end 
   }
   }
+
   high_scorer
 end
 
@@ -241,11 +242,25 @@ def player_with_longest_name
  longest_name
 end
   
+def long_name_steals_a_ton?
+  most_steals = 0
+  most_steals_name = nil
+  game_hash.each {|location, team_data|
+  team_data[:players].each {|name, stats|
+  if stats[:steals] > most_steals
+    most_steals = stats[:steals]
+    most_steals_name = name
+  end
+  }
+  }
+ if player_with_longest_name == most_steals_name
+   true
+ end
   
   
+end
   
   
-
 
   
   
